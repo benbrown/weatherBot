@@ -1,0 +1,42 @@
+{
+    "type": "AdaptiveCard",
+    "version": "1.0",
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "body": [
+        {
+            "type": "ColumnSet",
+            "columns": [
+                {
+                    "type": "Column",
+                    "width": "stretch",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "text": "@{string(forecast)}",
+                            "color": "Accent",
+                            "horizontalAlignment": "Center"
+                        },
+                        {
+                            "type": "Image",
+                            "altText": "{forecast[0].weather}",
+                            "url": "http://openweathermap.org/img/wn/10d@2x.png",
+                            "horizontalAlignment": "Center"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": "{forecast[0].high}&deg;",
+                            "horizontalAlignment": "Center",
+                            "weight": "Bolder"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": "{forecast[0].low}&deg;",
+                            "horizontalAlignment": "Center"
+                        }
+                    ]
+                }
+            ],
+            "spacing": "Small"
+        }
+    ]
+}

@@ -1,0 +1,41 @@
+{
+  "$type": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "name": "ensureHasLocation",
+    "createdAt": "2019-09-27T20:07:26.785Z",
+    "updatedAt": "2019-09-27T20:07:27.001Z",
+    "id": "504741"
+  },
+  "autoEndDialog": "true",
+  "defaultResultProperty": "dialog.result",
+  "events": [
+    {
+      "$type": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog"
+      },
+      "actions": [
+        {
+          "$type": "Microsoft.IfCondition",
+          "$designer": {
+            "id": "722534",
+            "name": "Branch: If/Else",
+            "updatedAt": "2019-09-27T20:07:56.215Z"
+          },
+          "condition": "user.zipcode == null",
+          "actions": [
+            {
+              "$type": "Microsoft.BeginDialog",
+              "$designer": {
+                "id": "299617",
+                "name": "Begin a Dialog"
+              },
+              "dialog": "getUserLocation"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "$schema": "../../BotProject/CSharp/Schemas/app.schema"
+}

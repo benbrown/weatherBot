@@ -1,0 +1,255 @@
+# HeroCard
+
+- ```
+  [Herocard
+      title = BotFramework Hero Card
+      subtitle = Microsoft Bot Framework
+      text = Build and connect intelligent bots to interact with your users naturally wherever they are, from text/sms to Skype, Slack, Office 365 mail and other popular services.
+      image = https://sec.ch9.ms/ch9/7ff5/e07cfef0-aa3b-40bb-9baa-7c9ef8ff7ff5/buildreactionbotframework_960.jpg
+      buttons = Show more cards]
+  ```
+
+# ThumbnailCard
+- ```
+[ThumbnailCard
+    title = BotFramework Thumbnail Card
+    subtitle = Microsoft Bot Framework
+    text = Build and connect intelligent bots to interact with your users naturally wherever they are, from text/sms to Skype, Slack, Office 365 mail and other popular services.
+    image = https://sec.ch9.ms/ch9/7ff5/e07cfef0-aa3b-40bb-9baa-7c9ef8ff7ff5/buildreactionbotframework_960.jpg
+    buttons = Get Started
+```
+
+# WeatherCard(weather)
+-```
+[ThumbnailCard
+    title = Weather for @{weather.city}
+    text = The current weather is @{weather.weather} and @{weather.temp}&deg;
+    image = @{weather.icon}
+]
+```
+
+# forecastCard(forecast)
+- ```
+  [Attachment=../../SampleBots/weatherBotIgnite/ComposerDialogs/common/forecast-card.json adaptivecard]
+  ```
+  
+# fiveDayForecast(forecast) 
+- ```
+Your five day forecast:
+@{ join(foreach(forecast, day, forecastDay(day)),"\n\n","\n\n") }
+```
+
+# forecastDay(day) 
+- ```
+@{day.day_of_week}
+@{day.weather}
+High: @{ int(day.high) }
+Low: @{ int(day.low) }
+
+```
+
+# bfdactivity-140796
+-Hey! I am a very basic weather bot. I can tell you the WEATHER or give a FORECAST.
+
+
+# bfdactivity-554644
+-The current weather is {dialog.myweather.description} with a temp of {dialog.myweather.temp}.
+
+
+# bfdactivity-369992
+-The api key is {$apikey}.
+
+
+# bfdactivity-707365
+-foo == {dialog.foo}
+
+
+# bfdactivity-602551
+-sdfsfdf
+
+
+# bfdactivity-515091
+-It's going to rain on {dialog.value.dt_txt}.
+
+
+# bfdactivity-861164
+-Couldn't find the weather! Let's try again...
+
+
+# bfdactivity-624533
+-Your token is {dialog.token}.
+
+
+# bfdactivity-839651
+-I set the token to {conversation.api_token}
+
+
+# bfdactivity-840815
+-I set the token to {conversation.api_token}
+
+
+# bfdactivity-469392
+-I set the token to {conversation.api_token}
+
+
+# bfdactivity-469519
+-I set the token to {user.api_token}
+
+
+# bfdactivity-786953
+-Got a forecast for {dialog.forecast_day}
+
+
+# bfdactivity-573075
+-raw date: {string(dialog.timestamp)}
+
+
+# bfdactivity-575131
+-sdfsdf
+
+
+# bfdactivity-955969
+-OK MOVING ON.
+
+
+# bfdactivity-300546
+-SAME DAY
+
+
+# bfdactivity-049950
+-NEW DAY
+
+
+# bfdactivity-952535
+- PROCESSING LOOP #{dialog.index}.
+
+
+# bfdactivity-421335
+-FINISHED!! {string($forecast)}
+
+
+# bfdactivity-519324
+-FORECAST IS COMPELTE!!!
+
+
+# bfdactivity-375410
+-{string($list)}
+
+
+# bfdactivity-424631
+- [fiveDayForecast($forecast)]
+
+
+# bfdactivity-935051
+-forecast day: {$forecast_day}
+
+
+# bfdactivity-786141
+-no need to init
+
+
+# bfdactivity-742790
+-initialized! {string($forecast)}
+
+
+# bfdactivity-199502
+-SET UP A NEW DAY: {string(dialog.oneday)}
+
+
+# bfdactivity-307370
+-[forecastCard($forecast)]
+
+# bfdactivity-086956
+- I had a problem loading the weather for you: {dialog.forecast_response.content.message}.  Let's try this again...
+
+
+# bfdprompt-173151
+-What is your zipcode?
+
+
+# bfdactivity-727083
+-What is your zipcode?
+
+
+# bfdprompt-252181
+-What is your zipcode?
+
+
+# bfdunrecognizedPrompt-252181
+-Please specify
+
+
+# bfdinvalidPrompt-252181
+-Please specify a zipcode in the form #####.
+
+
+# bfdactivity-742984
+-Your forecast for {dialog.forecast.city} is: [fiveDayForecast(dialog.forecast.forecast)]
+
+
+# bfdactivity-368764
+-Setting your zipcode to {user.zipcode}.
+
+
+# bfdactivity-334501
+-{string(dialog.forecast_response)}
+
+
+# bfdactivity-937428
+-Canceled.
+
+
+# bfdactivity-337872
+-I experienced an error while checking the weather: {dialog.weather_raw.content.message}.  Let's try this again...
+
+
+# bfdactivity-663756
+-{string($weather)}
+
+
+# bfdactivity-617335
+- The current weather is {dialog.weather.main} and the current temp is {dialog.weather.temp}&deg;.  The high today is {dialog.weather.high}&deg; and the low is {dialog.weather.low}&deg;.
+
+
+# bfdactivity-295174
+-Not sure how to respond. Say FORECAST or WEATHER.
+
+
+# bfdactivity-822152
+- [WeatherCard($weather)]
+
+
+# bfdactivity-380525
+-Yes, it looks like it will rain today.
+
+
+# bfdactivity-518892
+-There is no rain in the forecast today.
+
+
+# bfdactivity-337182
+-tomorrow is {$tomorrow}
+
+
+# bfdactivity-212737
+-FOUND FORECAST FOR TOMORROW: {string(dialog.value)}
+
+
+# bfdactivity-901141
+-DONE?
+
+
+# bfdactivity-137416
+-{dialog.value.datestamp} == {$tomorrow} ?
+
+
+# bfdactivity-626747
+-The forecast for tomorrow calls for rain!
+
+
+# bfdactivity-564253
+-No rain tomorrow.
+
+
+# bfdactivity-285194
+- {forecastDay(dialog.value)}

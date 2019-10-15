@@ -1,0 +1,297 @@
+{
+  "$type": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "createdAt": "2019-09-27T16:10:59.276Z",
+    "updatedAt": "2019-09-27T21:28:21.319Z",
+    "id": "562162",
+    "description": "a simple weather bot",
+    "name": "weatherBotHackathon"
+  },
+  "autoEndDialog": "true",
+  "defaultResultProperty": "dialog.result",
+  "recognizer": {
+    "$type": "Microsoft.RegexRecognizer",
+    "intents": [
+      {
+        "intent": "forecast",
+        "pattern": "forecast"
+      },
+      {
+        "intent": "weather",
+        "pattern": "weather"
+      },
+      {
+        "intent": "rain",
+        "pattern": "rain"
+      },
+      {
+        "intent": "tomorrow",
+        "pattern": "tomorrow"
+      }
+    ]
+  },
+  "generator": "common.lg",
+  "events": [
+    {
+      "$type": "Microsoft.OnConversationUpdateActivity",
+      "$designer": {
+        "id": "283725",
+        "name": "Welcome"
+      },
+      "constraint": "toLower(turn.Activity.membersAdded[0].name) != 'bot'",
+      "actions": [
+        {
+          "$type": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "140796",
+            "name": "Send an Activity",
+            "updatedAt": "2019-09-27T16:11:18.839Z"
+          },
+          "activity": "[bfdactivity-140796]"
+        }
+      ]
+    },
+    {
+      "$type": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "625738",
+        "name": "Forecast",
+        "updatedAt": "2019-09-27T19:43:03.365Z"
+      },
+      "actions": [
+        {
+          "$type": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "509617",
+            "name": "Begin a Dialog",
+            "updatedAt": "2019-09-27T19:43:00.163Z"
+          },
+          "dialog": "GetForecast",
+          "property": "$forecast"
+        },
+        {
+          "$type": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "742984",
+            "name": "Send an Activity"
+          },
+          "activity": "[bfdactivity-742984]"
+        }
+      ],
+      "intent": "forecast"
+    },
+    {
+      "$type": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "284926",
+        "name": "Weather",
+        "updatedAt": "2019-09-27T21:36:12.762Z"
+      },
+      "actions": [
+        {
+          "$type": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "704779",
+            "name": "Begin a Dialog",
+            "updatedAt": "2019-09-27T21:28:04.840Z"
+          },
+          "dialog": "GetWeather",
+          "property": "$weather"
+        },
+        {
+          "$type": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "617335",
+            "name": "Send an Activity"
+          },
+          "activity": "[bfdactivity-617335]"
+        },
+        {
+          "$type": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "822152",
+            "name": "Send an Activity"
+          },
+          "activity": "[bfdactivity-822152]"
+        }
+      ],
+      "intent": "weather"
+    },
+    {
+      "$type": "Microsoft.OnUnknownIntent",
+      "$designer": {
+        "id": "001115",
+        "name": "Fallback"
+      },
+      "actions": [
+        {
+          "$type": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "295174",
+            "name": "Send an Activity"
+          },
+          "activity": "[bfdactivity-295174]"
+        }
+      ]
+    },
+    {
+      "$type": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "306624",
+        "name": "Rain"
+      },
+      "actions": [
+        {
+          "$type": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "333922",
+            "name": "Begin a Dialog"
+          },
+          "dialog": "GetWeather",
+          "property": "$weather"
+        },
+        {
+          "$type": "Microsoft.IfCondition",
+          "$designer": {
+            "id": "427322",
+            "name": "Branch: If/Else"
+          },
+          "condition": "dialog.weather.rain == true",
+          "actions": [
+            {
+              "$type": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "380525",
+                "name": "Send an Activity"
+              },
+              "activity": "[bfdactivity-380525]"
+            }
+          ],
+          "elseActions": [
+            {
+              "$type": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "518892",
+                "name": "Send an Activity"
+              },
+              "activity": "[bfdactivity-518892]"
+            }
+          ]
+        }
+      ],
+      "intent": "rain"
+    },
+    {
+      "$type": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "682374",
+        "name": "tomorrow"
+      },
+      "intent": "tomorrow",
+      "actions": [
+        {
+          "$type": "Microsoft.SetProperty",
+          "$designer": {
+            "id": "520644",
+            "name": "Set a Property"
+          },
+          "property": "$tomorrow",
+          "value": "date(addDays(utcNow(),1))"
+        },
+        {
+          "$type": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "337182",
+            "name": "Send an Activity"
+          },
+          "activity": "[bfdactivity-337182]"
+        },
+        {
+          "$type": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "254783",
+            "name": "Begin a Dialog"
+          },
+          "dialog": "GetForecast",
+          "property": "$forecast"
+        },
+        {
+          "$type": "Microsoft.Foreach",
+          "$designer": {
+            "id": "870030",
+            "name": "Loop: For Each"
+          },
+          "indexProperty": "dialog.index",
+          "valueProperty": "dialog.value",
+          "listProperty": "dialog.forecast.forecast",
+          "actions": [
+            {
+              "$type": "Microsoft.IfCondition",
+              "$designer": {
+                "id": "862995",
+                "name": "Branch: If/Else"
+              },
+              "condition": "dialog.value.datestamp == $tomorrow",
+              "actions": [
+                {
+                  "$type": "Microsoft.IfCondition",
+                  "$designer": {
+                    "id": "159292",
+                    "name": "Branch: If/Else"
+                  },
+                  "condition": "dialog.value.rain == true",
+                  "actions": [
+                    {
+                      "$type": "Microsoft.SendActivity",
+                      "$designer": {
+                        "id": "626747",
+                        "name": "Send an Activity"
+                      },
+                      "activity": "[bfdactivity-626747]"
+                    }
+                  ],
+                  "elseActions": [
+                    {
+                      "$type": "Microsoft.SendActivity",
+                      "$designer": {
+                        "id": "564253",
+                        "name": "Send an Activity"
+                      },
+                      "activity": "[bfdactivity-564253]"
+                    }
+                  ]
+                },
+                {
+                  "$type": "Microsoft.SendActivity",
+                  "$designer": {
+                    "id": "285194",
+                    "name": "Send an Activity"
+                  },
+                  "activity": "[bfdactivity-285194]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "$type": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "901141",
+            "name": "Send an Activity"
+          },
+          "activity": "[bfdactivity-901141]"
+        }
+      ]
+    }
+  ],
+  "$schema": "../../app.schema",
+  "rules": [
+    {
+      "$type": "Microsoft.OnConversationUpdateActivity",
+      "$designer": {
+        "id": "376720"
+      },
+      "constraint": "toLower(turn.Activity.membersAdded[0].name) != 'bot'"
+    }
+  ]
+}

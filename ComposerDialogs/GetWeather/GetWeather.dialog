@@ -1,0 +1,88 @@
+{
+  "$type": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "name": "GetWeather",
+    "createdAt": "2019-09-27T16:55:23.171Z",
+    "updatedAt": "2019-09-27T16:55:23.399Z",
+    "id": "969302"
+  },
+  "autoEndDialog": "true",
+  "defaultResultProperty": "$weather",
+  "events": [
+    {
+      "$type": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "id": "550648",
+        "name": "Begin"
+      },
+      "actions": [
+        {
+          "$type": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "856624",
+            "name": "Begin a Dialog",
+            "updatedAt": "2019-09-27T21:22:51.872Z"
+          },
+          "dialog": "ensureHasLocation"
+        },
+        {
+          "$type": "Microsoft.HttpRequest",
+          "$designer": {
+            "id": "836075",
+            "name": "HTTP Request",
+            "updatedAt": "2019-10-09T15:36:54.203Z"
+          },
+          "method": "GET",
+          "url": "https://weatherbot-ignite-2019.azurewebsites.net/api/getWeather?code=5x30tbQhIT52rE1i2V2XIQJ3U54JPGC%2FOPeqeuaj4ZNHs4NYMCg8oQ%3D%3D&zipcode={user.zipcode}",
+          "property": "dialog.weather_raw",
+          "responseType": "Json"
+        },
+        {
+          "$type": "Microsoft.IfCondition",
+          "$designer": {
+            "id": "019906",
+            "name": "Branch: If/Else"
+          },
+          "condition": "dialog.weather_raw.statusCode == 200",
+          "actions": [
+            {
+              "$type": "Microsoft.SetProperty",
+              "$designer": {
+                "id": "917549",
+                "name": "Set a Property"
+              },
+              "property": "$weather",
+              "value": "dialog.weather_raw.content"
+            }
+          ],
+          "elseActions": [
+            {
+              "$type": "Microsoft.SendActivity",
+              "$designer": {
+                "id": "337872",
+                "name": "Send an Activity"
+              },
+              "activity": "[bfdactivity-337872]"
+            },
+            {
+              "$type": "Microsoft.BeginDialog",
+              "$designer": {
+                "id": "517194",
+                "name": "Begin a Dialog"
+              },
+              "dialog": "getUserLocation"
+            },
+            {
+              "$type": "Microsoft.RepeatDialog",
+              "$designer": {
+                "id": "533199",
+                "name": "Repeat this Dialog"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "$schema": "../../BotProject/CSharp/Schemas/app.schema"
+}

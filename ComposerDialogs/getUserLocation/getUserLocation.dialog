@@ -1,0 +1,79 @@
+{
+  "$type": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "name": "getUserLocation",
+    "description": "\n",
+    "id": "600597"
+  },
+  "autoEndDialog": "true",
+  "defaultResultProperty": "dialog.result",
+  "recognizer": {
+    "$type": "Microsoft.RegexRecognizer",
+    "intents": [
+      {
+        "intent": "cancel",
+        "pattern": "cancel"
+      }
+    ]
+  },
+  "events": [
+    {
+      "$type": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog"
+      },
+      "actions": [
+        {
+          "$type": "Microsoft.TextInput",
+          "$designer": {
+            "id": "252181",
+            "name": "Prompt for text"
+          },
+          "prompt": "[bfdprompt-252181]",
+          "invalidPrompt": "[bfdinvalidPrompt-252181]",
+          "maxTurnCount": 10,
+          "validations": [
+            "length(turn.value) == 5"
+          ],
+          "property": "user.zipcode",
+          "alwaysPrompt": true,
+          "allowInterruptions": "always",
+          "outputFormat": "trim"
+        },
+        {
+          "$type": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "368764",
+            "name": "Send an Activity"
+          },
+          "activity": "[bfdactivity-368764]"
+        }
+      ]
+    },
+    {
+      "$type": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "034826",
+        "name": "cancel"
+      },
+      "actions": [
+        {
+          "$type": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "937428",
+            "name": "Send an Activity"
+          },
+          "activity": "[bfdactivity-937428]"
+        },
+        {
+          "$type": "Microsoft.CancelAllDialogs",
+          "$designer": {
+            "id": "914183",
+            "name": "Cancel All Dialogs"
+          }
+        }
+      ],
+      "intent": "cancel"
+    }
+  ]
+}
