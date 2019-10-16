@@ -219,11 +219,11 @@ Low: @{ int(day.low) }
 
 
 # bfdactivity-380525
--Yes, it looks like it will rain today.
+-Yes, it looks like it will rain {$day}.
 
 
 # bfdactivity-518892
--There is no rain in the forecast today.
+-There is no rain in the forecast for {$day}.
 
 
 # bfdactivity-337182
@@ -252,3 +252,13 @@ Low: @{ int(day.low) }
 
 # bfdactivity-285194
 - {forecastDay(dialog.value)}
+
+
+# bfdactivity-622768
+- day = {@day}
+
+# bfdactivity-533991
+-checking for rain today.
+
+# bfdactivity-297877
+- [forecastDay($weather)]

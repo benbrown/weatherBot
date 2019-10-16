@@ -7,15 +7,7 @@
   },
   "autoEndDialog": "true",
   "defaultResultProperty": "dialog.result",
-  "recognizer": {
-    "$type": "Microsoft.RegexRecognizer",
-    "intents": [
-      {
-        "intent": "cancel",
-        "pattern": "cancel"
-      }
-    ]
-  },
+  "recognizer": "getUserLocation.lu",
   "events": [
     {
       "$type": "Microsoft.OnBeginDialog",
@@ -37,7 +29,7 @@
           ],
           "property": "user.zipcode",
           "alwaysPrompt": true,
-          "allowInterruptions": "always",
+          "allowInterruptions": "never",
           "outputFormat": "trim"
         },
         {
@@ -73,7 +65,7 @@
           }
         }
       ],
-      "intent": "cancel"
+      "intent": "quit"
     }
   ]
 }

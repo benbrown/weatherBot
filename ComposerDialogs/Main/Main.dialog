@@ -9,27 +9,7 @@
   },
   "autoEndDialog": "true",
   "defaultResultProperty": "dialog.result",
-  "recognizer": {
-    "$type": "Microsoft.RegexRecognizer",
-    "intents": [
-      {
-        "intent": "forecast",
-        "pattern": "forecast"
-      },
-      {
-        "intent": "weather",
-        "pattern": "weather"
-      },
-      {
-        "intent": "rain",
-        "pattern": "rain"
-      },
-      {
-        "intent": "tomorrow",
-        "pattern": "tomorrow"
-      }
-    ]
-  },
+  "recognizer": "Main.lu",
   "generator": "common.lg",
   "events": [
     {
@@ -142,13 +122,61 @@
       },
       "actions": [
         {
-          "$type": "Microsoft.BeginDialog",
+          "$type": "Microsoft.IfCondition",
           "$designer": {
-            "id": "333922",
-            "name": "Begin a Dialog"
+            "id": "265493",
+            "name": "Branch: If/Else"
           },
-          "dialog": "GetWeather",
-          "property": "$weather"
+          "condition": "@day != \"tomorrow\"",
+          "elseActions": [
+            {
+              "$type": "Microsoft.SetProperty",
+              "$designer": {
+                "id": "608949",
+                "name": "Set a Property"
+              },
+              "property": "$day",
+              "value": "@day"
+            },
+            {
+              "$type": "Microsoft.BeginDialog",
+              "$designer": {
+                "id": "357949",
+                "name": "Begin a Dialog"
+              },
+              "dialog": "getTomorrowWeather",
+              "property": "$weather"
+            }
+          ],
+          "actions": [
+            {
+              "$type": "Microsoft.SetProperty",
+              "$designer": {
+                "id": "419571",
+                "name": "Set a Property"
+              },
+              "property": "$day",
+              "value": "\"today\""
+            },
+            {
+              "$type": "Microsoft.BeginDialog",
+              "$designer": {
+                "id": "333922",
+                "name": "Begin a Dialog"
+              },
+              "dialog": "GetWeather",
+              "property": "$weather"
+            },
+            {
+              "$type": "Microsoft.SetProperty",
+              "$designer": {
+                "id": "992213",
+                "name": "Set a Property"
+              },
+              "property": "dialog.weather.day_of_week",
+              "value": "\"Today\""
+            }
+          ]
         },
         {
           "$type": "Microsoft.IfCondition",
@@ -177,6 +205,14 @@
               "activity": "[bfdactivity-518892]"
             }
           ]
+        },
+        {
+          "$type": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "297877",
+            "name": "Send an Activity"
+          },
+          "activity": "[bfdactivity-297877]"
         }
       ],
       "intent": "rain"

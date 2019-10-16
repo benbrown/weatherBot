@@ -1,0 +1,69 @@
+{
+  "$type": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "name": "getTomorrowWeather",
+    "description": "\n",
+    "id": "423513"
+  },
+  "autoEndDialog": "true",
+  "defaultResultProperty": "$tomorrow_forecast",
+  "events": [
+    {
+      "$type": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog"
+      },
+      "actions": [
+        {
+          "$type": "Microsoft.SetProperty",
+          "$designer": {
+            "id": "559080",
+            "name": "Set a Property"
+          },
+          "property": "$tomorrow",
+          "value": "date(addDays(utcNow(),1))"
+        },
+        {
+          "$type": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "554134",
+            "name": "Begin a Dialog"
+          },
+          "dialog": "GetForecast",
+          "property": "$forecast"
+        },
+        {
+          "$type": "Microsoft.Foreach",
+          "$designer": {
+            "id": "099243",
+            "name": "Loop: For Each"
+          },
+          "indexProperty": "dialog.index",
+          "valueProperty": "dialog.value",
+          "listProperty": "dialog.forecast.forecast",
+          "actions": [
+            {
+              "$type": "Microsoft.IfCondition",
+              "$designer": {
+                "id": "797782",
+                "name": "Branch: If/Else"
+              },
+              "condition": "dialog.value.datestamp == $tomorrow",
+              "actions": [
+                {
+                  "$type": "Microsoft.SetProperty",
+                  "$designer": {
+                    "id": "590763",
+                    "name": "Set a Property"
+                  },
+                  "property": "$tomorrow_forecast",
+                  "value": "dialog.value"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

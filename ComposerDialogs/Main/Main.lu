@@ -1,0 +1,20 @@
+> See https://aka.ms/lu-file-format to learn about supported LU concepts.
+
+# forecast
+- show me the forecast
+- 5 day forecast
+- what is the weather this week
+
+# weather
+- what is the weather
+- how is the weather right now
+- how is the weather
+- show me the weather
+- weather
+
+# rain
+- is it going to rain?
+- will it rain {day=today}?
+- is it raining?
+- is it going to rain {day=tomorrow}
+- will there be rain {day=tomorrow}

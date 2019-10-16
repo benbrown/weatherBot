@@ -1,0 +1,7 @@
+{
+    "$type": "Microsoft.MultiLanguageRecognizer",
+    "recognizers": {
+        "en-us": "getUserLocation.en-us.lu",
+        "": "getUserLocation.en-us.lu"
+    }
+}

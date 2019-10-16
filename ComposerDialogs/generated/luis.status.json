@@ -1,0 +1,26 @@
+{
+  "ComposerDialogs/GetForecast/GetForecast.lu": {
+    "lastUpdateTime": 1,
+    "lastPublishTime": 0
+  },
+  "ComposerDialogs/GetWeather/GetWeather.lu": {
+    "lastUpdateTime": 1,
+    "lastPublishTime": 0
+  },
+  "ComposerDialogs/Main/Main.lu": {
+    "lastUpdateTime": 1571256229942,
+    "lastPublishTime": 1571256234873
+  },
+  "ComposerDialogs/ensureHasLocation/ensureHasLocation.lu": {
+    "lastUpdateTime": 1,
+    "lastPublishTime": 0
+  },
+  "ComposerDialogs/getUserLocation/getUserLocation.lu": {
+    "lastUpdateTime": 1571246596159,
+    "lastPublishTime": 1571246618007
+  },
+  "ComposerDialogs/getTomorrowWeather/getTomorrowWeather.lu": {
+    "lastUpdateTime": 1571255558443,
+    "lastPublishTime": 0
+  }
+}
